@@ -1,4 +1,5 @@
  {% extends 'base.html' %}
+{% block title %} |  Search {% endblock %}
  {% block content %}
  {% load humanize %}
  {% load static %}
@@ -21,47 +22,35 @@
     <div class="container">
         <div class="search-area-inner">
             <div class="search-contents">
-                <form method="GET">
+                <form method="GET" action="{% url 'search' %}">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="select-brand">
-                                    <option disabled="disabled" selected="selected">Select Brand</option>
-                                    <option>Audi</option>
-                                    <option>BMW</option>
-                                    <option>Honda</option>
-                                    <option>Nissan</option>
+                                <select class="selectpicker search-fields" name="model">
+                                    <option disabled="disabled" selected="selected">Model</option>
+                                    {% for model in model_search %}
+                                    <option value="{{model}}">{{model}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="select-make">
-                                    <option disabled="disabled" selected="selected">Select Make</option>
-                                    <option>BMW</option>
-                                    <option>Honda</option>
-                                    <option>Lamborghini Huracán</option>
-                                    <option>Sports Car</option>
+                                <select class="selectpicker search-fields" name="city">
+                                    <option disabled="disabled" selected="selected">City</option>
+                                    {% for city in city_search %}
+                                    <option value="{{city}}">{{city}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="select-location">
-                                    <option disabled="disabled" selected="selected">Select Location</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="select-year">
-                                    <option disabled="disabled" selected="selected">Select Year</option>
-                                    <option>2016</option>
-                                    <option>2017</option>
-                                    <option>2018</option>
-                                    <option>2019</option>
+                                <select class="selectpicker search-fields" name="year">
+                                    <option disabled="disabled" selected="selected">Year</option>
+                                    {% for year in year_search %}
+                                    <option value="{{year}}">{{year}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
@@ -69,22 +58,14 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="select-type">
-                                    <option disabled="disabled" selected="selected">Select Type Of Car</option>
-                                    <option>New Car</option>
-                                    <option>Used Car</option>
-                                </select>
+                                <select class="selectpicker search-fields" name="body_style">
+                                    <option disabled="disabled" selected="selected">Body style</option>
+                                    {% for body in body_search %}
+                                    <option value="{{body}}">{{body}}</option>
+                                    {% endfor %}</select>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="transmission">
-                                    <option disabled="disabled" selected="selected">Transmission</option>
-                                    <option>Automatic</option>
-                                    <option>Manual</option>
-                                </select>
-                            </div>
-                        </div>
+                        
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <div class="range-slider">
@@ -193,7 +174,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <p class="copy">© 2020 <a href="#">Carzone Corp.</a> All Rights Reserved.</p>
+                    <p class="copy">© {% now 'Y' %} <a href="#">Carzone Corp.</a> All Rights Reserved.</p>
                 </div>
                 <div class="col-lg-4">
                     <div class="social-list-2">
