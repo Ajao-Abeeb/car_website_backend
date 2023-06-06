@@ -8537,9 +8537,9 @@ table {
         font-size: 35px;
     }
 
-    .d-none-992{
-        display: none;
-    }
+    /* .d-none-992{ */
+        /* display: none; */
+    /* } */
 
     .details-banner .price-box-2{
         float: left;
